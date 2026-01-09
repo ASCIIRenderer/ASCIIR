@@ -24,6 +24,7 @@ export default defineConfig({
       // Externalize deps that shouldn't be bundled
       external: ['react', 'react-dom', 'react/jsx-runtime'],
       output: {
+        exports: 'named',
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
@@ -32,7 +33,7 @@ export default defineConfig({
       },
     },
     sourcemap: true,
-    minify: 'terser',
+    minify: 'esbuild',
   },
   resolve: {
     alias: {

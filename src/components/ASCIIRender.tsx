@@ -78,11 +78,12 @@ export const ASCIIRender = forwardRef<ASCIIRenderRef, ASCIIRenderProps>(
 
           if (src instanceof HTMLImageElement) {
             img = src;
-          } else if (src instanceof Blob) {
-            img = await loadImageFromBlob(src);
-          } else if (src instanceof File) {
+          } else if (typeof File !== 'undefined' && src instanceof File) {
+            // Check File before Blob since File extends Blob
             const dataUrl = await readFileAsDataURL(src);
             img = await loadImage(dataUrl);
+          } else if (src instanceof Blob) {
+            img = await loadImageFromBlob(src);
           } else if (typeof src === 'string') {
             img = await loadImage(src);
           } else {

@@ -34,9 +34,9 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/asciirender.js",
-      "require": "./dist/asciirender.umd.cjs",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/asciirender.umd.cjs"
     }
   },
   "files": [
