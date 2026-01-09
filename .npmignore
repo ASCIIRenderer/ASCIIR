@@ -1,0 +1,11 @@
+# Ignore everything
+*
+
+# But not these files...
+!dist/
+dist/*
+
+!package.json
+!README.md
+!LICENSE
+!CHANGELOG.md

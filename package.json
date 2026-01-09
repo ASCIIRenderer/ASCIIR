@@ -1,0 +1,77 @@
+{
+  "name": "asciirender",
+  "version": "1.0.0",
+  "description": "A powerful React component for converting images to beautiful ASCII art with customizable settings",
+  "author": "Vinay",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vinay/asciirender.git"
+  },
+  "homepage": "https://github.com/vinay/asciirender#readme",
+  "bugs": {
+    "url": "https://github.com/vinay/asciirender/issues"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "keywords": [
+    "ascii",
+    "ascii-art",
+    "image-processing",
+    "react",
+    "react-component",
+    "image-to-ascii",
+    "text-art",
+    "canvas",
+    "svg",
+    "typescript"
+  ],
+  "type": "module",
+  "main": "./dist/asciirender.umd.cjs",
+  "module": "./dist/asciirender.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/asciirender.js",
+      "require": "./dist/asciirender.umd.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "dev": "vite --config vite.demo.config.ts",
+    "build": "tsc && vite build",
+    "build:lib": "tsc -p tsconfig.lib.json && vite build --config vite.config.ts",
+    "build:demo": "vite build --config vite.demo.config.ts",
+    "preview": "vite preview --config vite.demo.config.ts",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build:lib"
+  },
+  "peerDependencies": {
+    "react": ">=17.0.0",
+    "react-dom": ">=17.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.14.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "lucide-react": "^0.562.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.0",
+    "vite-plugin-dts": "^4.5.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
