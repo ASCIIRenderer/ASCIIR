@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { 
   ASCIIRender, 
   useASCIIRender, 
@@ -27,14 +27,19 @@ import {
   Code,
   Eye,
   EyeOff,
-  Image as ImageIcon
+  Image as ImageIcon,
+  Link,
+  Check
 } from 'lucide-react';
 
 const App: React.FC = () => {
   const [config, setConfig] = useState<Partial<ASCIIRenderConfig>>(DEFAULT_CONFIG);
   const [imageSrc, setImageSrc] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string>('');
+  const [isUrlMode, setIsUrlMode] = useState<boolean>(false);
   const [showOriginal, setShowOriginal] = useState(false);
   const [zoom, setZoom] = useState(1);
+  const [codeCopied, setCodeCopied] = useState(false);
   const asciiRef = useASCIIRender();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
 
@@ -72,6 +77,17 @@ const App: React.FC = () => {
     if (e.target.files && e.target.files[0]) {
       const url = URL.createObjectURL(e.target.files[0]);
       setImageSrc(url);
+      setImageUrl('');
+      setIsUrlMode(false);
+      setShowOriginal(false);
+      setZoom(1);
+    }
+  };
+
+  const handleLoadUrl = () => {
+    if (imageUrl.trim()) {
+      setImageSrc(imageUrl.trim());
+      setIsUrlMode(true);
       setShowOriginal(false);
       setZoom(1);
     }
@@ -84,6 +100,91 @@ const App: React.FC = () => {
   const handleCopy = async () => {
     await asciiRef.current?.copyToClipboard();
     alert('Text copied to clipboard!');
+  };
+
+  // Generate the component code string for copying
+  const generateComponentCode = useMemo(() => {
+    const configEntries: string[] = [];
+    
+    // Only include non-default values
+    if (config.resolutionWidth !== DEFAULT_CONFIG.resolutionWidth) {
+      configEntries.push(`resolutionWidth: ${config.resolutionWidth}`);
+    }
+    if (config.characterSet !== DEFAULT_CONFIG.characterSet) {
+      configEntries.push(`characterSet: "${config.characterSet}"`);
+    }
+    if (config.inverted !== DEFAULT_CONFIG.inverted) {
+      configEntries.push(`inverted: ${config.inverted}`);
+    }
+    if (config.contrastStretch !== DEFAULT_CONFIG.contrastStretch) {
+      configEntries.push(`contrastStretch: ${config.contrastStretch}`);
+    }
+    if (config.fontColor !== DEFAULT_CONFIG.fontColor) {
+      configEntries.push(`fontColor: "${config.fontColor}"`);
+    }
+    if (config.backgroundColor !== DEFAULT_CONFIG.backgroundColor) {
+      configEntries.push(`backgroundColor: "${config.backgroundColor}"`);
+    }
+    if (config.lineHeight !== DEFAULT_CONFIG.lineHeight) {
+      configEntries.push(`lineHeight: ${config.lineHeight}`);
+    }
+    if (config.scaleRatio !== DEFAULT_CONFIG.scaleRatio) {
+      configEntries.push(`scaleRatio: ${config.scaleRatio}`);
+    }
+    if (config.fontSize !== DEFAULT_CONFIG.fontSize) {
+      configEntries.push(`fontSize: ${config.fontSize}`);
+    }
+    if (config.transparentBackground !== DEFAULT_CONFIG.transparentBackground) {
+      configEntries.push(`transparentBackground: ${config.transparentBackground}`);
+    }
+    if (config.dithering !== DEFAULT_CONFIG.dithering) {
+      configEntries.push(`dithering: ${config.dithering}`);
+    }
+    if (config.colorMode !== DEFAULT_CONFIG.colorMode) {
+      configEntries.push(`colorMode: '${config.colorMode}'`);
+    }
+    if (config.fontFamily !== DEFAULT_CONFIG.fontFamily) {
+      configEntries.push(`fontFamily: "${config.fontFamily}"`);
+    }
+    if (config.exportScale !== DEFAULT_CONFIG.exportScale) {
+      configEntries.push(`exportScale: ${config.exportScale}`);
+    }
+    if (config.fillTransparency !== DEFAULT_CONFIG.fillTransparency) {
+      configEntries.push(`fillTransparency: ${config.fillTransparency}`);
+    }
+    if (config.brightness !== DEFAULT_CONFIG.brightness) {
+      configEntries.push(`brightness: ${config.brightness}`);
+    }
+    if (config.contrast !== DEFAULT_CONFIG.contrast) {
+      configEntries.push(`contrast: ${config.contrast}`);
+    }
+    if (config.saturation !== DEFAULT_CONFIG.saturation) {
+      configEntries.push(`saturation: ${config.saturation}`);
+    }
+    if (config.colorMode === 'palette' && JSON.stringify(config.colorPalette) !== JSON.stringify(DEFAULT_CONFIG.colorPalette)) {
+      configEntries.push(`colorPalette: ${JSON.stringify(config.colorPalette)}`);
+    }
+
+    const srcValue = isUrlMode && imageUrl ? `"${imageUrl}"` : '"/path/to/your-image.jpg"';
+    const configStr = configEntries.length > 0 
+      ? `\n  config={{\n    ${configEntries.join(',\n    ')}\n  }}`
+      : '';
+
+    return `import { ASCIIRender } from 'asciirender';
+
+function MyComponent() {
+  return (
+    <ASCIIRender
+      src=${srcValue}${configStr}
+    />
+  );
+}`;
+  }, [config, isUrlMode, imageUrl]);
+
+  const handleCopyCode = async () => {
+    await navigator.clipboard.writeText(generateComponentCode);
+    setCodeCopied(true);
+    setTimeout(() => setCodeCopied(false), 2000);
   };
 
   const result = asciiRef.current?.getResult();
@@ -120,8 +221,43 @@ const App: React.FC = () => {
             className="w-full bg-blue-600 hover:bg-blue-700 text-white rounded-lg px-4 py-2 flex items-center justify-center gap-2"
           >
             <Upload className="w-4 h-4"/>
-            Upload New Image
+            Upload Image
           </button>
+          
+          <div className="relative">
+            <div className="flex items-center gap-2 text-xs text-slate-500 mb-2">
+              <div className="flex-1 h-px bg-slate-700"></div>
+              <span>or enter URL</span>
+              <div className="flex-1 h-px bg-slate-700"></div>
+            </div>
+            <div className="flex gap-2">
+              <input
+                type="url"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleLoadUrl()}
+                placeholder="https://example.com/image.jpg"
+                className="flex-1 bg-slate-900 border border-slate-700 text-slate-200 text-sm rounded-lg px-3 py-2 focus:ring-blue-500 focus:border-blue-500"
+              />
+              <button
+                onClick={handleLoadUrl}
+                disabled={!imageUrl.trim()}
+                className="bg-slate-700 hover:bg-slate-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg px-3 py-2"
+              >
+                <Link className="w-4 h-4"/>
+              </button>
+            </div>
+          </div>
+
+          {imageSrc && (
+            <div className="text-xs text-slate-500 bg-slate-900/50 rounded p-2 break-all">
+              {isUrlMode ? (
+                <span className="flex items-center gap-1"><Link className="w-3 h-3"/> {imageUrl}</span>
+              ) : (
+                <span className="flex items-center gap-1"><ImageIcon className="w-3 h-3"/> Uploaded file</span>
+              )}
+            </div>
+          )}
         </div>
 
         <hr className="border-slate-700" />
@@ -442,6 +578,33 @@ const App: React.FC = () => {
           </div>
         </div>
 
+        <hr className="border-slate-700" />
+
+        {/* Component Code */}
+        <div className="space-y-4">
+          <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider flex items-center gap-2">
+            <Code className="w-4 h-4" /> Component Code
+          </h3>
+          <div className="bg-slate-900 border border-slate-700 rounded-lg overflow-hidden">
+            <div className="flex items-center justify-between px-3 py-2 bg-slate-800/50 border-b border-slate-700">
+              <span className="text-xs text-slate-400 font-mono">React Component</span>
+              <button
+                onClick={handleCopyCode}
+                className={`text-xs px-2 py-1 rounded flex items-center gap-1 transition-colors ${codeCopied ? 'bg-green-600 text-white' : 'bg-slate-700 hover:bg-slate-600 text-slate-300'}`}
+              >
+                {codeCopied ? <Check className="w-3 h-3"/> : <Copy className="w-3 h-3"/>}
+                {codeCopied ? 'Copied!' : 'Copy'}
+              </button>
+            </div>
+            <pre className="p-3 text-xs font-mono text-slate-300 overflow-x-auto max-h-48 custom-scrollbar">
+              <code>{generateComponentCode}</code>
+            </pre>
+          </div>
+          <p className="text-xs text-slate-500">
+            Install the package with: <code className="bg-slate-800 px-1.5 py-0.5 rounded">npm install asciirender</code>
+          </p>
+        </div>
+
         <div className="mt-auto pt-6">
           <button 
             onClick={handleReset}
@@ -486,6 +649,14 @@ const App: React.FC = () => {
 
           {result && (
             <div className="flex items-center gap-2">
+              <button 
+                onClick={handleCopyCode}
+                className={`${codeCopied ? 'bg-green-600' : 'bg-purple-600 hover:bg-purple-700'} text-white rounded-lg px-3 py-1.5 flex items-center gap-2 text-sm transition-colors`}
+              >
+                {codeCopied ? <Check className="w-3 h-3"/> : <Code className="w-3 h-3"/>}
+                {codeCopied ? 'Copied!' : 'Copy Code'}
+              </button>
+              <div className="h-4 w-px bg-slate-700"/>
               <button 
                 onClick={handleCopy}
                 className="bg-slate-700 hover:bg-slate-600 text-slate-100 rounded-lg px-3 py-1.5 flex items-center gap-2 text-sm"

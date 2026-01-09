@@ -1,11 +1,47 @@
-# Ignore everything
-*
+# Source files - not needed in package
+src/
+demo/
 
-# But not these files...
-!dist/
-dist/*
+# Config files
+*.config.ts
+*.config.js
+tsconfig*.json
+.eslintrc*
+.prettierrc*
+.editorconfig
 
-!package.json
-!README.md
-!LICENSE
-!CHANGELOG.md
+# Development files
+.github/
+.git/
+.vscode/
+.idea/
+
+# Environment and local files
+.env*
+*.local
+
+# Documentation (non-essential)
+CONTRIBUTING.md
+NPM_PUBLISH.md
+.npmrc
+
+# Build and cache
+node_modules/
+*.log
+*.tgz
+.cache/
+.turbo/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+__tests__/
+*.test.*
+*.spec.*
+coverage/
+
+# Demo files
+index.html
+vite.demo.config.ts
