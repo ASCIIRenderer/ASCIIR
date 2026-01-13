@@ -23,11 +23,7 @@ const Navigation: React.FC = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group" aria-label="ASCIIR Home">
-            <img src="/NoBgIcon.svg" alt="" className="w-10 h-10 object-contain" aria-hidden="true" />
-            <div>
-              <p className="font-bold text-slate-900 group-hover:text-blue-600 transition-colors">ASCIIR</p>
-              <p className="text-xs text-slate-500">ASCII Art Generator</p>
-            </div>
+            <img src="/NOBGlogo.svg" alt="ASCIIR" className="h-9 object-contain" aria-hidden="true" />
           </Link>
 
           {/* Desktop Navigation */}

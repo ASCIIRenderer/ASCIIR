@@ -113,7 +113,7 @@ const DemoPage: React.FC = () => {
     const configCopy = { ...config };
     if (configCopy.autoScaleHeight) delete (configCopy as any).scaleRatio;
     
-    return `import { ASCIIR } from 'asciir';
+    return `import { ASCIIR } from '@asciirender/asciir';
 
 export default function Demo() {
   return (

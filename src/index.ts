@@ -4,7 +4,7 @@
  * @packageDocumentation
  * @example
  * ```tsx
- * import { ASCIIR, useASCIIRender } from 'asciir';
+ * import { ASCIIR, useASCIIRender } from '@asciirender/asciir';
  * 
  * function App() {
  *   const ref = useASCIIRender();

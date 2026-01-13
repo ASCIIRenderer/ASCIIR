@@ -17,7 +17,8 @@ interface SEOProps {
 const BASE_URL = 'https://asciir.dev';
 const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
 const SITE_NAME = 'ASCIIR';
-const TWITTER_HANDLE = '@asciir';
+const TWITTER_HANDLE = '@asciirender';
+const NPM_PACKAGE = '@asciirender/asciir';
 
 type Cleanup = (() => void) | undefined;
 
@@ -196,10 +197,10 @@ export const SEO: React.FC<SEOProps> = ({
       '@type': 'Organization',
       name: 'ASCIIR',
       url: BASE_URL,
-      logo: `${BASE_URL}/logo.svg`,
+      logo: `${BASE_URL}/favicon.svg`,
       sameAs: [
-        'https://github.com/asciir/asciir',
-        'https://www.npmjs.com/package/asciir',
+        'https://github.com/ASCIIRenderer/ASCIIR',
+        'https://www.npmjs.com/package/@asciirender/asciir',
       ],
     };
 
@@ -243,14 +244,15 @@ export const SEO: React.FC<SEOProps> = ({
 export const HomeSEO: React.FC = () => (
   <SEO
     title="ASCIIR - Convert Images to Beautiful ASCII Art | React Component"
-    description="Transform any image into stunning ASCII art with ASCIIR. A powerful, open-source React component featuring multiple color modes, custom character sets, real-time preview, and export to PNG/SVG/TXT. TypeScript ready."
-    keywords="ascii art generator, image to ascii converter, react ascii component, typescript ascii library, text art generator, terminal art, open source ascii, npm ascii package"
+    description="Transform any image into stunning ASCII art with ASCIIR (@asciirender/asciir). A powerful, open-source React component featuring multiple color modes, custom character sets, real-time preview, and export to PNG/SVG/TXT. TypeScript ready, zero dependencies."
+    keywords="ascii art generator, image to ascii converter, react ascii component, typescript ascii library, text art generator, terminal art, open source ascii, npm ascii package, @asciirender/asciir, react image processing"
     url="https://asciir.dev"
     jsonLd={{
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'ASCIIR',
       url: 'https://asciir.dev',
+      description: 'A powerful React component for converting images to beautiful ASCII art',
       potentialAction: {
         '@type': 'SearchAction',
         target: 'https://asciir.dev/docs?search={search_term_string}',
@@ -262,9 +264,9 @@ export const HomeSEO: React.FC = () => (
 
 export const DemoSEO: React.FC = () => (
   <SEO
-    title="Interactive Demo - Try ASCIIR Online"
-    description="Try ASCIIR live in your browser. Upload images, customize settings, preview ASCII art in real-time, and export to PNG, SVG, or TXT. No installation required."
-    keywords="ascii art demo, online ascii converter, try ascii generator, image to text converter online, free ascii art tool"
+    title="Interactive Demo - Try ASCIIR ASCII Art Generator Online"
+    description="Try ASCIIR (@asciirender/asciir) live in your browser. Upload images, customize settings with multiple color modes, preview ASCII art in real-time, and export to PNG, SVG, or TXT. No installation required."
+    keywords="ascii art demo, online ascii converter, try ascii generator, image to text converter online, free ascii art tool, @asciirender/asciir demo, react ascii preview"
     url="https://asciir.dev/demo"
     jsonLd={{
       '@context': 'https://schema.org',
@@ -279,22 +281,29 @@ export const DemoSEO: React.FC = () => (
         price: '0',
         priceCurrency: 'USD',
       },
+      featureList: [
+        'Multiple color modes',
+        'Custom character sets',
+        'Real-time preview',
+        'Export to PNG, SVG, TXT',
+        'Image filters and adjustments',
+      ],
     }}
   />
 );
 
 export const DocsSEO: React.FC = () => (
   <SEO
-    title="Documentation - ASCIIR API Reference & Guides"
-    description="Complete documentation for ASCIIR. Learn installation, configuration options, API reference, examples, and advanced usage. Get started in minutes."
-    keywords="asciir documentation, ascii art api, react component docs, typescript api reference, ascii generator guide, npm package documentation"
+    title="Documentation - ASCIIR API Reference & Installation Guide"
+    description="Complete documentation for ASCIIR (@asciirender/asciir). Learn installation with npm install @asciirender/asciir, configuration options, API reference, examples, and advanced usage. Get started in minutes with our React ASCII art component."
+    keywords="asciir documentation, @asciirender/asciir docs, ascii art api, react component docs, typescript api reference, ascii generator guide, npm install @asciirender/asciir"
     url="https://asciir.dev/docs"
     type="article"
     jsonLd={{
       '@context': 'https://schema.org',
       '@type': 'TechArticle',
-      headline: 'ASCIIR Documentation',
-      description: 'Complete documentation for the ASCIIR React component',
+      headline: 'ASCIIR Documentation - Complete API Reference',
+      description: 'Complete documentation for the ASCIIR React component (@asciirender/asciir)',
       author: {
         '@type': 'Organization',
         name: 'ASCIIR',
@@ -304,9 +313,10 @@ export const DocsSEO: React.FC = () => (
         name: 'ASCIIR',
         logo: {
           '@type': 'ImageObject',
-          url: 'https://asciir.dev/logo.svg',
+          url: 'https://asciir.dev/favicon.svg',
         },
       },
+      mainEntityOfPage: 'https://asciir.dev/docs',
     }}
   />
 );

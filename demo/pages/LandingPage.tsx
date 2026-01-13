@@ -33,21 +33,30 @@ const LandingPage: React.FC = () => {
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-white">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-[0.03]">
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-blue-50/30">
+        {/* Premium noise texture overlay */}
+        <div className="absolute inset-0 opacity-[0.015]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+        }} />
+        
+        {/* Elegant grid pattern */}
+        <div className="absolute inset-0 opacity-[0.02]">
           <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-                <path d="M 40 0 L 0 0 0 40" fill="none" stroke="black" strokeWidth="1" />
+              <pattern id="elegantGrid" width="60" height="60" patternUnits="userSpaceOnUse">
+                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="currentColor" strokeWidth="0.5" />
               </pattern>
             </defs>
-            <rect width="100%" height="100%" fill="url(#grid)" />
+            <rect width="100%" height="100%" fill="url(#elegantGrid)" className="text-slate-900" />
           </svg>
         </div>
+
+        {/* Radial gradient accents */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-200/20 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-cyan-200/15 rounded-full blur-3xl" />
         
         {/* Subtle gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-50/50" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white/80" />
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24 lg:py-32">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -152,8 +161,13 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-white to-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-white via-slate-50/50 to-white relative overflow-hidden">
+        {/* Subtle texture */}
+        <div className="absolute inset-0 opacity-[0.008]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }} />
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4">
               Packed with Features
@@ -209,8 +223,15 @@ const LandingPage: React.FC = () => {
       </section>
 
       {/* Code Example Section */}
-      <section className="py-16 md:py-24 bg-slate-900">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
+        {/* Premium texture for dark section */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }} />
+        <div className="absolute top-0 right-0 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl" />
+        
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
               Simple to Use
@@ -220,11 +241,11 @@ const LandingPage: React.FC = () => {
             </p>
           </div>
 
-          <div className="bg-slate-800 rounded-2xl border border-slate-700 overflow-hidden shadow-2xl">
-            <div className="flex items-center gap-2 px-4 py-3 bg-slate-800 border-b border-slate-700">
-              <span className="w-3 h-3 rounded-full bg-red-500" />
-              <span className="w-3 h-3 rounded-full bg-yellow-500" />
-              <span className="w-3 h-3 rounded-full bg-green-500" />
+          <div className="bg-slate-800/80 backdrop-blur-sm rounded-2xl border border-slate-700/50 overflow-hidden shadow-2xl shadow-black/20">
+            <div className="flex items-center gap-2 px-4 py-3 bg-slate-800/60 border-b border-slate-700/50">
+              <span className="w-3 h-3 rounded-full bg-red-500/80" />
+              <span className="w-3 h-3 rounded-full bg-yellow-500/80" />
+              <span className="w-3 h-3 rounded-full bg-green-500/80" />
               <span className="ml-4 text-slate-500 text-sm font-mono">App.tsx</span>
             </div>
             <pre className="p-4 sm:p-6 overflow-x-auto">
@@ -256,8 +277,12 @@ function App() {
       </section>
 
       {/* Installation Section */}
-      <section className="py-16 md:py-24 bg-slate-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-slate-50 via-white to-blue-50/20 relative overflow-hidden">
+        {/* Premium texture */}
+        <div className="absolute inset-0 opacity-[0.01]" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+        }} />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
               Quick Installation
@@ -267,8 +292,8 @@ function App() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-lg p-8 text-center">
-            <code className="text-xl sm:text-2xl text-slate-900 font-mono bg-slate-50 px-6 py-3 rounded-xl inline-block">
+          <div className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-xl shadow-slate-200/50 p-8 text-center backdrop-blur-sm">
+            <code className="text-xl sm:text-2xl text-slate-900 font-mono bg-gradient-to-r from-slate-50 to-slate-100 px-6 py-3 rounded-xl inline-block border border-slate-200">
               npm install @asciirender/asciir
             </code>
             <p className="mt-6 text-slate-500">
@@ -279,8 +304,15 @@ function App() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-r from-blue-600 to-blue-700">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-16 md:py-24 bg-gradient-to-r from-blue-600 via-blue-700 to-blue-600 relative overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 left-10 w-40 h-40 border border-white/20 rounded-full" />
+          <div className="absolute bottom-10 right-10 w-60 h-60 border border-white/10 rounded-full" />
+          <div className="absolute top-1/2 left-1/3 w-32 h-32 border border-white/15 rounded-full" />
+        </div>
+        
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">
             Ready to Create ASCII Art?
           </h2>
@@ -290,13 +322,13 @@ function App() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/demo"
-              className="px-8 py-3.5 rounded-xl bg-white text-blue-600 font-semibold hover:bg-blue-50 transition-colors shadow-lg"
+              className="px-8 py-3.5 rounded-xl bg-white text-blue-600 font-semibold hover:bg-blue-50 transition-all shadow-lg shadow-blue-900/30 hover:shadow-xl"
             >
               Launch Demo
             </Link>
             <Link
               to="/docs"
-              className="px-8 py-3.5 rounded-xl border-2 border-white text-white font-semibold hover:bg-white/10 transition-colors"
+              className="px-8 py-3.5 rounded-xl border-2 border-white/80 text-white font-semibold hover:bg-white/10 transition-colors backdrop-blur-sm"
             >
               View Documentation
             </Link>
