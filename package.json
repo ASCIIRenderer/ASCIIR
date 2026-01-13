@@ -1,16 +1,16 @@
 {
-  "name": "asciirender",
+  "name": "asciir",
   "version": "1.0.0",
   "description": "A powerful React component for converting images to beautiful ASCII art with customizable settings",
   "author": "Vinay",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/vinay/asciirender.git"
+    "url": "git+https://github.com/ACIIRenderer/ASCIIR.git"
   },
-  "homepage": "https://github.com/vinay/asciirender#readme",
+  "homepage": "https://github.com/ACIIRenderer/ASCIIR#readme",
   "bugs": {
-    "url": "https://github.com/vinay/asciirender/issues"
+    "url": "https://github.com/ACIIRenderer/ASCIIR/issues"
   },
   "publishConfig": {
     "access": "public",
@@ -26,34 +26,33 @@
     "text-art",
     "canvas",
     "svg",
-    "typescript"
+    "typescript",
+    "image-converter"
   ],
   "type": "module",
-  "main": "./dist/asciirender.umd.cjs",
-  "module": "./dist/asciirender.js",
+  "main": "./dist/asciir.umd.cjs",
+  "module": "./dist/asciir.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/asciirender.js",
-      "require": "./dist/asciirender.umd.cjs"
+      "import": "./dist/asciir.js",
+      "require": "./dist/asciir.umd.cjs"
     }
   },
   "files": [
-    "dist",
-    "README.md",
-    "LICENSE"
+    "dist"
   ],
   "sideEffects": false,
   "scripts": {
     "dev": "vite --config vite.demo.config.ts",
-    "build": "tsc && vite build",
+    "build": "npm run build:lib",
     "build:lib": "tsc -p tsconfig.lib.json && vite build --config vite.config.ts",
     "build:demo": "vite build --config vite.demo.config.ts",
     "preview": "vite preview --config vite.demo.config.ts",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build:lib"
+    "prepublishOnly": "npm run build:lib",
+    "size": "npm run build:lib && npx size-limit"
   },
   "peerDependencies": {
     "react": ">=17.0.0",
@@ -67,6 +66,8 @@
     "lucide-react": "^0.562.0",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
+    "react-helmet-async": "^2.0.5",
+    "react-router-dom": "^7.12.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0",
     "vite-plugin-dts": "^4.5.0"

@@ -1,6 +1,7 @@
 # Source files - not needed in package
 src/
 demo/
+public/
 
 # Config files
 *.config.ts
@@ -19,10 +20,6 @@ tsconfig*.json
 # Environment and local files
 .env*
 *.local
-
-# Documentation (non-essential)
-CONTRIBUTING.md
-NPM_PUBLISH.md
 .npmrc
 
 # Build and cache
@@ -31,6 +28,7 @@ node_modules/
 *.tgz
 .cache/
 .turbo/
+demo-dist/
 
 # OS files
 .DS_Store
@@ -44,4 +42,8 @@ coverage/
 
 # Demo files
 index.html
-vite.demo.config.ts
+
+# Package lock (users should use their own)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

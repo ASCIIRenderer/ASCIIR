@@ -35,8 +35,8 @@ jobs:
         run: |
           echo "Checking dist directory..."
           ls -la dist/
-          test -f dist/asciirender.js
-          test -f dist/asciirender.umd.cjs
+          test -f dist/asciir.js
+          test -f dist/asciir.umd.cjs
           test -f dist/index.d.ts
 
       - name: Publish to npm

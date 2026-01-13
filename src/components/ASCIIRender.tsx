@@ -129,7 +129,7 @@ export const ASCIIRender = forwardRef<ASCIIRenderRef, ASCIIRenderProps>(
           const error = err instanceof Error ? err : new Error(String(err));
           onError?.(error);
         }
-      }, 50); // Small debounce
+      }, 200); // Debounce to prevent UI hanging during rapid adjustments
 
       return () => clearTimeout(timer);
     }, [loadedImage, config, onGenerate, onError]);

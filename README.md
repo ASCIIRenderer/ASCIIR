@@ -1,11 +1,11 @@
-# ASCIIRender
+# ASCIIR
 
 <p align="center">
-  <img src="https://img.shields.io/npm/v/asciirender?color=blue&label=npm" alt="npm version" />
-  <img src="https://img.shields.io/npm/dm/asciirender?color=green" alt="npm downloads" />
-  <img src="https://img.shields.io/bundlephobia/minzip/asciirender?color=orange" alt="bundle size" />
-  <img src="https://img.shields.io/github/license/vinay/asciirender?color=purple" alt="license" />
-  <img src="https://img.shields.io/npm/types/asciirender?color=blue" alt="TypeScript" />
+  <img src="https://img.shields.io/npm/v/asciir?color=blue&label=npm" alt="npm version" />
+  <img src="https://img.shields.io/npm/dm/asciir?color=green" alt="npm downloads" />
+  <img src="https://img.shields.io/bundlephobia/minzip/asciir?color=orange" alt="bundle size" />
+  <img src="https://img.shields.io/github/license/YOUR_USERNAME/asciir?color=purple" alt="license" />
+  <img src="https://img.shields.io/npm/types/asciir?color=blue" alt="TypeScript" />
 </p>
 
 <p align="center">
@@ -16,8 +16,7 @@
   <a href="#installation">Installation</a> •
   <a href="#quick-start">Quick Start</a> •
   <a href="#api-reference">API</a> •
-  <a href="#examples">Examples</a> •
-  <a href="#contributing">Contributing</a>
+  <a href="#examples">Examples</a>
 </p>
 
 ---
@@ -31,30 +30,30 @@
 - 📦 **Multiple Output Formats** - HTML, SVG, or Canvas
 - 💾 **Export Options** - Download as PNG, SVG, or TXT
 - 🎯 **TypeScript** - Full type definitions included
-- ⚡ **Lightweight** - No external dependencies (peer deps: React only)
+- ⚡ **Lightweight** - ~5KB gzipped, zero runtime dependencies
 
 ## 📦 Installation
 
 ```bash
-npm install asciirender
+npm install asciir
 ```
 
 ```bash
-yarn add asciirender
+yarn add asciir
 ```
 
 ```bash
-pnpm add asciirender
+pnpm add asciir
 ```
 
 ## 🚀 Quick Start
 
 ```tsx
-import { ASCIIRender } from 'asciirender';
+import { ASCIIR } from 'asciir';
 
 function App() {
   return (
-    <ASCIIRender 
+    <ASCIIR 
       src="/path/to/image.jpg"
       config={{ 
         resolutionWidth: 100,
@@ -67,19 +66,19 @@ function App() {
 
 ## 📖 API Reference
 
-### `<ASCIIRender />` Component
+### `<ASCIIR />` Component
 
 The main component for rendering ASCII art.
 
 ```tsx
-import { ASCIIRender, useASCIIRender } from 'asciirender';
+import { ASCIIR, useASCIIRender } from 'asciir';
 
 function App() {
   const asciiRef = useASCIIRender();
   
   return (
     <div>
-      <ASCIIRender 
+      <ASCIIR 
         ref={asciiRef}
         src={imageSource}
         config={config}
@@ -114,7 +113,7 @@ function App() {
 ```typescript
 interface ASCIIRenderConfig {
   resolutionWidth: number;      // Width in characters (default: 150)
-  characterSet: string;         // Character ramp (default: " .vinay")
+  characterSet: string;         // Character ramp (default: " .:-=+*#%@")
   inverted: boolean;            // Invert character ramp (default: false)
   contrastStretch: boolean;     // Auto contrast (default: true)
   fontColor: string;            // Text color for mono mode (default: "#FFFFFF")
@@ -157,10 +156,10 @@ import {
   CHAR_SETS,      // Character set presets
   FONTS,          // Font presets
   PALETTE_PRESETS // Color palette presets
-} from 'asciirender';
+} from 'asciir';
 
 // Character sets
-CHAR_SETS.default        // " .vinay"
+CHAR_SETS.default        // " .:-=+*#%@"
 CHAR_SETS.standard_short // "@%#*+=-:. "
 CHAR_SETS.blocks         // "█▓▒░ "
 CHAR_SETS.binary         // "01 "
@@ -188,7 +187,7 @@ import {
   generateSVG,
   generateHTML,
   loadImage 
-} from 'asciirender';
+} from 'asciir';
 
 // Load and process an image
 const img = await loadImage('/path/to/image.jpg');
@@ -205,13 +204,13 @@ const canvas = generateCanvasFromAscii(result, config, 2);
 ### Basic Usage
 
 ```tsx
-<ASCIIRender src="/image.jpg" />
+<ASCIIR src="/image.jpg" />
 ```
 
 ### Colored ASCII Art
 
 ```tsx
-<ASCIIRender 
+<ASCIIR 
   src="/image.jpg"
   config={{
     colorMode: 'original',
@@ -223,9 +222,9 @@ const canvas = generateCanvasFromAscii(result, config, 2);
 ### Custom Palette
 
 ```tsx
-import { PALETTE_PRESETS } from 'asciirender';
+import { ASCIIR, PALETTE_PRESETS } from 'asciir';
 
-<ASCIIRender 
+<ASCIIR 
   src="/image.jpg"
   config={{
     colorMode: 'palette',
@@ -237,14 +236,14 @@ import { PALETTE_PRESETS } from 'asciirender';
 ### With Downloads
 
 ```tsx
-import { ASCIIRender, useASCIIRender } from 'asciirender';
+import { ASCIIR, useASCIIRender } from 'asciir';
 
 function App() {
   const ref = useASCIIRender();
   
   return (
     <>
-      <ASCIIRender ref={ref} src="/image.jpg" />
+      <ASCIIR ref={ref} src="/image.jpg" />
       <button onClick={() => ref.current?.downloadPNG('my-art.png')}>
         Save as PNG
       </button>
@@ -256,6 +255,9 @@ function App() {
 ### File Upload
 
 ```tsx
+import { useState } from 'react';
+import { ASCIIR } from 'asciir';
+
 function App() {
   const [file, setFile] = useState<File | null>(null);
   
@@ -266,7 +268,7 @@ function App() {
         accept="image/*"
         onChange={(e) => setFile(e.target.files?.[0] || null)}
       />
-      {file && <ASCIIRender src={file} />}
+      {file && <ASCIIR src={file} />}
     </>
   );
 }
@@ -276,8 +278,8 @@ function App() {
 
 ```bash
 # Clone the repository
-git clone https://github.com/vinay/asciirender.git
-cd asciirender
+git clone https://github.com/YOUR_USERNAME/asciir.git
+cd asciir
 
 # Install dependencies
 npm install
@@ -302,22 +304,10 @@ npm run build:lib
 npm run build:demo
 ```
 
-## 🚀 Publishing to npm
-
-See [NPM_PUBLISH.md](NPM_PUBLISH.md) for detailed instructions on how to publish this package.
-
 ## 📝 License
 
 MIT © Vinay
 
-## 🤝 Contributing
-
-Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
-
 ## 🌟 Show Your Support
 
 Give a ⭐️ if this project helped you!
-
-## 📜 Changelog
-
-See [CHANGELOG.md](CHANGELOG.md) for a list of changes.

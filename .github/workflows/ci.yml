@@ -35,8 +35,8 @@ jobs:
 
       - name: Verify dist files exist
         run: |
-          test -f dist/asciirender.js
-          test -f dist/asciirender.umd.cjs
+          test -f dist/asciir.js
+          test -f dist/asciir.umd.cjs
           test -f dist/index.d.ts
 
   # Optional: Build demo to verify everything works

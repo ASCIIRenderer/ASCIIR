@@ -1,17 +1,17 @@
 /**
- * ASCIIRender - Convert images to beautiful ASCII art
+ * ASCIIR - Convert images to beautiful ASCII art
  * 
  * @packageDocumentation
  * @example
  * ```tsx
- * import { ASCIIRender, useASCIIRender } from 'asciirender';
+ * import { ASCIIR, useASCIIRender } from 'asciir';
  * 
  * function App() {
  *   const ref = useASCIIRender();
  *   
  *   return (
  *     <div>
- *       <ASCIIRender 
+ *       <ASCIIR 
  *         ref={ref}
  *         src="/image.jpg"
  *         config={{ resolutionWidth: 100 }}
@@ -27,6 +27,9 @@
 
 // Main component
 export { ASCIIRender, default } from './components/ASCIIRender';
+
+// Brand alias
+export { ASCIIRender as ASCIIR } from './components/ASCIIRender';
 
 // Types
 export type {
@@ -61,14 +64,14 @@ import { useRef } from 'react';
 import type { ASCIIRenderRef } from './types';
 
 /**
- * Hook to get a typed ref for ASCIIRender component
+ * Hook to get a typed ref for ASCIIR component
  * 
  * @example
  * ```tsx
  * const asciiRef = useASCIIRender();
  * 
  * return (
- *   <ASCIIRender ref={asciiRef} src={imageSrc} />
+ *   <ASCIIR ref={asciiRef} src={imageSrc} />
  * );
  * ```
  */

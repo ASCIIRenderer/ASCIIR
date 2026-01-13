@@ -5,7 +5,7 @@ import { ASCIIRenderConfig } from './types';
  */
 export const CHAR_SETS = {
   /** Default character set */
-  default: " .vinay",
+  default: " .:-=+*#%@",
   /** Standard short character set */
   standard_short: "@%#*+=-:. ",
   /** Standard long character set with more detail */
@@ -72,6 +72,7 @@ export const DEFAULT_CONFIG: ASCIIRenderConfig = {
   backgroundColor: "#242424",
   lineHeight: 1.0,
   scaleRatio: 0.55,
+  autoScaleHeight: false,
   fontSize: 12,
   transparentBackground: false,
   dithering: false,

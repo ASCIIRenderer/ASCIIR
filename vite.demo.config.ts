@@ -14,11 +14,12 @@ export default defineConfig({
   build: {
     outDir: 'demo-dist',
     emptyOutDir: true,
+    minify: 'esbuild',
   },
   resolve: {
     alias: {
       '@': resolve(__dirname, '.'),
-      'asciirender': resolve(__dirname, 'src/index.ts'),
+      'asciir': resolve(__dirname, 'src/index.ts'),
     },
   },
 });

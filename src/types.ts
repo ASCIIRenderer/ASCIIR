@@ -4,7 +4,7 @@
 export interface ASCIIRenderConfig {
   /** Width of output in characters (columns). Default: 150 */
   resolutionWidth: number;
-  /** Character set for ASCII mapping (dark to light). Default: " .vinay" */
+  /** Character set for ASCII mapping (dark to light). Default: " .:-=+*#%@" */
   characterSet: string;
   /** Whether to invert the character ramp. Default: false */
   inverted: boolean;
@@ -18,6 +18,8 @@ export interface ASCIIRenderConfig {
   lineHeight: number;
   /** Vertical scale ratio (to correct aspect ratio). Default: 0.55 */
   scaleRatio: number;
+  /** Auto-scale ratio based on font height. Default: false */
+  autoScaleHeight: boolean;
   /** Font size in pixels. Default: 12 */
   fontSize: number;
   /** Whether background should be transparent. Default: false */
