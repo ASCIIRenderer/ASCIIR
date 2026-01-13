@@ -1,6 +1,6 @@
 {
   "name": "asciir",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A powerful React component for converting images to beautiful ASCII art with customizable settings",
   "author": "Vinay",
   "license": "MIT",
