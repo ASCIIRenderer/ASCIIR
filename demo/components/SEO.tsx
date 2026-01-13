@@ -1,5 +1,4 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import React, { useEffect } from 'react';
 
 interface SEOProps {
   title?: string;
@@ -20,6 +19,84 @@ const DEFAULT_IMAGE = `${BASE_URL}/og-image.png`;
 const SITE_NAME = 'ASCIIR';
 const TWITTER_HANDLE = '@asciir';
 
+type Cleanup = (() => void) | undefined;
+
+const updateMetaTag = (
+  attribute: 'name' | 'property',
+  key: string,
+  content?: string
+): Cleanup => {
+  if (!content || typeof document === 'undefined') {
+    return undefined;
+  }
+
+  const selector = `meta[${attribute}="${key}"]`;
+  let element = document.head.querySelector(selector) as HTMLMetaElement | null;
+  let created = false;
+  let previousContent: string | null = null;
+
+  if (!element) {
+    element = document.createElement('meta');
+    element.setAttribute(attribute, key);
+    element.dataset.asciirSeo = 'true';
+    document.head.appendChild(element);
+    created = true;
+  } else if (!element.dataset.asciirSeo) {
+    previousContent = element.getAttribute('content');
+  }
+
+  element.setAttribute('content', content);
+
+  return () => {
+    if (!element) return;
+    if (created || element.dataset.asciirSeo === 'true') {
+      element.remove();
+    } else if (previousContent !== null) {
+      element.setAttribute('content', previousContent);
+    } else {
+      element.removeAttribute('content');
+    }
+  };
+};
+
+const appendLinkTag = (
+  rel: string,
+  href?: string,
+  extra?: Record<string, string>
+): Cleanup => {
+  if (!href || typeof document === 'undefined') {
+    return undefined;
+  }
+
+  const link = document.createElement('link');
+  link.rel = rel;
+  link.href = href;
+  link.dataset.asciirSeo = 'true';
+
+  if (extra) {
+    Object.entries(extra).forEach(([key, value]) => {
+      link.setAttribute(key, value);
+    });
+  }
+
+  document.head.appendChild(link);
+  return () => link.remove();
+};
+
+const injectJsonLd = (data: object): Cleanup => {
+  if (typeof document === 'undefined') {
+    return undefined;
+  }
+
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.dataset.asciirSeo = 'true';
+  script.text = JSON.stringify(data);
+  document.head.appendChild(script);
+
+  return () => script.remove();
+};
+
 export const SEO: React.FC<SEOProps> = ({
   title = 'ASCIIR - Convert Images to Beautiful ASCII Art',
   description = 'A powerful React component for converting images to stunning ASCII art. Features multiple color modes, custom character sets, filters, and export options. Open source and TypeScript ready.',
@@ -32,108 +109,134 @@ export const SEO: React.FC<SEOProps> = ({
 }) => {
   const fullTitle = title.includes('ASCIIR') ? title : `${title} | ASCIIR`;
 
-  // Default JSON-LD structured data
-  const defaultJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'SoftwareApplication',
-    name: 'ASCIIR',
-    applicationCategory: 'DeveloperApplication',
-    operatingSystem: 'Any',
-    offers: {
-      '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
-    },
-    description: description,
-    url: url,
-    author: {
+  useEffect(() => {
+    if (typeof document === 'undefined') {
+      return;
+    }
+
+    const cleanups: Cleanup[] = [];
+    const previousTitle = document.title;
+    document.title = fullTitle;
+    cleanups.push(() => {
+      document.title = previousTitle;
+    });
+
+    const baseNameMeta: Array<[string, string | undefined]> = [
+      ['title', fullTitle],
+      ['description', description],
+      ['keywords', keywords],
+      ['author', author],
+      ['robots', 'index, follow'],
+      ['language', 'English'],
+      ['revisit-after', '7 days'],
+      ['twitter:card', 'summary_large_image'],
+      ['twitter:url', url],
+      ['twitter:title', fullTitle],
+      ['twitter:description', description],
+      ['twitter:image', image],
+      ['twitter:site', TWITTER_HANDLE],
+      ['twitter:creator', TWITTER_HANDLE],
+      ['format-detection', 'telephone=no'],
+      ['theme-color', '#2563EB'],
+      ['msapplication-TileColor', '#2563EB'],
+    ];
+
+    baseNameMeta.forEach(([key, value]) => {
+      cleanups.push(updateMetaTag('name', key, value));
+    });
+
+    const propertyMeta: Array<[string, string | undefined]> = [
+      ['og:type', type],
+      ['og:url', url],
+      ['og:title', fullTitle],
+      ['og:description', description],
+      ['og:image', image],
+      ['og:image:width', '1200'],
+      ['og:image:height', '630'],
+      ['og:site_name', SITE_NAME],
+      ['og:locale', 'en_US'],
+    ];
+
+    propertyMeta.forEach(([key, value]) => {
+      cleanups.push(updateMetaTag('property', key, value));
+    });
+
+    cleanups.push(appendLinkTag('canonical', url));
+    cleanups.push(appendLinkTag('preconnect', 'https://fonts.googleapis.com'));
+    cleanups.push(
+      appendLinkTag('preconnect', 'https://fonts.gstatic.com', {
+        crossOrigin: 'anonymous',
+      })
+    );
+
+    const defaultJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'SoftwareApplication',
+      name: 'ASCIIR',
+      applicationCategory: 'DeveloperApplication',
+      operatingSystem: 'Any',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'USD',
+      },
+      description,
+      url,
+      author: {
+        '@type': 'Organization',
+        name: 'ASCIIR',
+        url: BASE_URL,
+      },
+      programmingLanguage: ['TypeScript', 'React', 'JavaScript'],
+      softwareRequirements: 'React 18+',
+    };
+
+    const organizationJsonLd = {
+      '@context': 'https://schema.org',
       '@type': 'Organization',
       name: 'ASCIIR',
       url: BASE_URL,
-    },
-    programmingLanguage: ['TypeScript', 'React', 'JavaScript'],
-    softwareRequirements: 'React 18+',
-  };
+      logo: `${BASE_URL}/logo.svg`,
+      sameAs: [
+        'https://github.com/asciir/asciir',
+        'https://www.npmjs.com/package/asciir',
+      ],
+    };
 
-  const organizationJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'ASCIIR',
-    url: BASE_URL,
-    logo: `${BASE_URL}/logo.svg`,
-    sameAs: [
-      'https://github.com/asciir/asciir',
-      'https://www.npmjs.com/package/asciir',
-    ],
-  };
+    const breadcrumbJsonLd = {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        {
+          '@type': 'ListItem',
+          position: 1,
+          name: 'Home',
+          item: BASE_URL,
+        },
+      ],
+    };
 
-  const breadcrumbJsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: BASE_URL,
-      },
-    ],
-  };
+    [jsonLd || defaultJsonLd, organizationJsonLd, breadcrumbJsonLd].forEach(
+      (block) => {
+        cleanups.push(injectJsonLd(block));
+      }
+    );
 
-  return (
-    <Helmet>
-      {/* Primary Meta Tags */}
-      <title>{fullTitle}</title>
-      <meta name="title" content={fullTitle} />
-      <meta name="description" content={description} />
-      <meta name="keywords" content={keywords} />
-      <meta name="author" content={author} />
-      <meta name="robots" content="index, follow" />
-      <meta name="language" content="English" />
-      <meta name="revisit-after" content="7 days" />
-      <link rel="canonical" href={url} />
+    return () => {
+      cleanups.forEach((cleanup) => cleanup && cleanup());
+    };
+  }, [
+    author,
+    description,
+    fullTitle,
+    image,
+    jsonLd,
+    keywords,
+    type,
+    url,
+  ]);
 
-      {/* Open Graph / Facebook */}
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={url} />
-      <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:site_name" content={SITE_NAME} />
-      <meta property="og:locale" content="en_US" />
-
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={url} />
-      <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
-      <meta name="twitter:site" content={TWITTER_HANDLE} />
-      <meta name="twitter:creator" content={TWITTER_HANDLE} />
-
-      {/* Additional SEO Tags */}
-      <meta name="format-detection" content="telephone=no" />
-      <meta name="theme-color" content="#2563EB" />
-      <meta name="msapplication-TileColor" content="#2563EB" />
-      
-      {/* Preconnect for performance */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-
-      {/* JSON-LD Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify(jsonLd || defaultJsonLd)}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(organizationJsonLd)}
-      </script>
-      <script type="application/ld+json">
-        {JSON.stringify(breadcrumbJsonLd)}
-      </script>
-    </Helmet>
-  );
+  return null;
 };
 
 // Specific SEO configs for each page
