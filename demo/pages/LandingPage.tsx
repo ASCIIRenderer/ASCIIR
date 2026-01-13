@@ -22,7 +22,7 @@ const LandingPage: React.FC = () => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
-    navigator.clipboard.writeText('npm install asciir');
+    navigator.clipboard.writeText('npm install @asciirender/asciir');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -68,7 +68,7 @@ const LandingPage: React.FC = () => {
 
               {/* Install command */}
               <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex items-center justify-between max-w-md shadow-sm">
-                <code className="text-slate-700 font-mono text-sm sm:text-base">npm install asciir</code>
+                <code className="text-slate-700 font-mono text-sm sm:text-base">npm install @asciirender/asciir</code>
                 <button
                   onClick={handleCopy}
                   className="ml-4 p-2 hover:bg-slate-200 rounded-lg transition-colors text-slate-500 hover:text-slate-900"
@@ -95,7 +95,7 @@ const LandingPage: React.FC = () => {
 
               <div className="pt-4 flex items-center gap-6 text-sm text-slate-500">
                 <a
-                  href="https://github.com/AkshayPall/asciir"
+                  href="https://github.com/ASCIIRenderer/ASCIIR"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:text-slate-900 transition-colors"
@@ -104,7 +104,7 @@ const LandingPage: React.FC = () => {
                   GitHub
                 </a>
                 <a
-                  href="https://github.com/AkshayPall/asciir"
+                  href="https://github.com/ASCIIRenderer/ASCIIR"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 hover:text-slate-900 transition-colors"
@@ -228,7 +228,7 @@ const LandingPage: React.FC = () => {
               <span className="ml-4 text-slate-500 text-sm font-mono">App.tsx</span>
             </div>
             <pre className="p-4 sm:p-6 overflow-x-auto">
-              <code className="text-sm text-slate-300 font-mono leading-relaxed">{`import { ASCIIR, useASCIIRender } from 'asciir';
+              <code className="text-sm text-slate-300 font-mono leading-relaxed">{`import { ASCIIR, useASCIIRender } from '@asciirender/asciir';
 
 function App() {
   const ref = useASCIIRender();
@@ -269,7 +269,7 @@ function App() {
 
           <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-lg p-8 text-center">
             <code className="text-xl sm:text-2xl text-slate-900 font-mono bg-slate-50 px-6 py-3 rounded-xl inline-block">
-              npm install asciir
+              npm install @asciirender/asciir
             </code>
             <p className="mt-6 text-slate-500">
               Requires React 18+ and supports TypeScript out of the box

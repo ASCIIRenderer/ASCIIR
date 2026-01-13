@@ -53,7 +53,7 @@ const Navigation: React.FC = () => {
           {/* Right Side */}
           <div className="flex items-center gap-4">
             <a
-              href="https://github.com/asciir/asciir"
+              href="https://github.com/ASCIIRenderer/ASCIIR"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg font-semibold hover:bg-slate-800 transition-colors"
@@ -94,7 +94,7 @@ const Navigation: React.FC = () => {
                 </Link>
               ))}
               <a
-                href="https://github.com/asciir/asciir"
+                href="https://github.com/ASCIIRenderer/ASCIIR"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 px-4 py-3 text-slate-700 hover:bg-slate-50 rounded-lg font-semibold"

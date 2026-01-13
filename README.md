@@ -1,11 +1,11 @@
 # ASCIIR
 
 <p align="center">
-  <img src="https://img.shields.io/npm/v/asciir?color=blue&label=npm" alt="npm version" />
-  <img src="https://img.shields.io/npm/dm/asciir?color=green" alt="npm downloads" />
-  <img src="https://img.shields.io/bundlephobia/minzip/asciir?color=orange" alt="bundle size" />
-  <img src="https://img.shields.io/github/license/YOUR_USERNAME/asciir?color=purple" alt="license" />
-  <img src="https://img.shields.io/npm/types/asciir?color=blue" alt="TypeScript" />
+  <img src="https://img.shields.io/npm/v/@asciirender/asciir?color=blue&label=npm" alt="npm version" />
+  <img src="https://img.shields.io/npm/dm/@asciirender/asciir?color=green" alt="npm downloads" />
+  <img src="https://img.shields.io/bundlephobia/minzip/@asciirender/asciir?color=orange" alt="bundle size" />
+  <img src="https://img.shields.io/github/license/ASCIIRenderer/ASCIIR?color=purple" alt="license" />
+  <img src="https://img.shields.io/npm/types/@asciirender/asciir?color=blue" alt="TypeScript" />
 </p>
 
 <p align="center">
@@ -13,10 +13,10 @@
 </p>
 
 <p align="center">
-  <a href="#installation">Installation</a> •
-  <a href="#quick-start">Quick Start</a> •
-  <a href="#api-reference">API</a> •
-  <a href="#examples">Examples</a>
+  <a href="#-installation">Installation</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-api-reference">API</a> •
+  <a href="#-examples">Examples</a>
 </p>
 
 ---
@@ -35,21 +35,21 @@
 ## 📦 Installation
 
 ```bash
-npm install asciir
+npm install @asciirender/asciir
 ```
 
 ```bash
-yarn add asciir
+yarn add @asciirender/asciir
 ```
 
 ```bash
-pnpm add asciir
+pnpm add @asciirender/asciir
 ```
 
 ## 🚀 Quick Start
 
 ```tsx
-import { ASCIIR } from 'asciir';
+import { ASCIIR } from '@asciirender/asciir';
 
 function App() {
   return (
@@ -71,7 +71,7 @@ function App() {
 The main component for rendering ASCII art.
 
 ```tsx
-import { ASCIIR, useASCIIRender } from 'asciir';
+import { ASCIIR, useASCIIRender } from '@asciirender/asciir';
 
 function App() {
   const asciiRef = useASCIIRender();
@@ -156,7 +156,7 @@ import {
   CHAR_SETS,      // Character set presets
   FONTS,          // Font presets
   PALETTE_PRESETS // Color palette presets
-} from 'asciir';
+} from '@asciirender/asciir';
 
 // Character sets
 CHAR_SETS.default        // " .:-=+*#%@"
@@ -187,7 +187,7 @@ import {
   generateSVG,
   generateHTML,
   loadImage 
-} from 'asciir';
+} from '@asciirender/asciir';
 
 // Load and process an image
 const img = await loadImage('/path/to/image.jpg');
@@ -222,7 +222,7 @@ const canvas = generateCanvasFromAscii(result, config, 2);
 ### Custom Palette
 
 ```tsx
-import { ASCIIR, PALETTE_PRESETS } from 'asciir';
+import { ASCIIR, PALETTE_PRESETS } from '@asciirender/asciir';
 
 <ASCIIR 
   src="/image.jpg"
@@ -236,7 +236,7 @@ import { ASCIIR, PALETTE_PRESETS } from 'asciir';
 ### With Downloads
 
 ```tsx
-import { ASCIIR, useASCIIRender } from 'asciir';
+import { ASCIIR, useASCIIRender } from '@asciirender/asciir';
 
 function App() {
   const ref = useASCIIRender();
@@ -256,7 +256,7 @@ function App() {
 
 ```tsx
 import { useState } from 'react';
-import { ASCIIR } from 'asciir';
+import { ASCIIR } from '@asciirender/asciir';
 
 function App() {
   const [file, setFile] = useState<File | null>(null);
@@ -278,8 +278,8 @@ function App() {
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/asciir.git
-cd asciir
+git clone https://github.com/ASCIIRenderer/ASCIIR.git
+cd ASCIIR
 
 # Install dependencies
 npm install

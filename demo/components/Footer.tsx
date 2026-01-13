@@ -27,7 +27,7 @@ const Footer: React.FC = () => {
               <li><Link to="/" className="hover:text-white transition-colors">Home</Link></li>
               <li><Link to="/docs" className="hover:text-white transition-colors">Documentation</Link></li>
               <li><Link to="/demo" className="hover:text-white transition-colors">Demo</Link></li>
-              <li><a href="https://www.npmjs.com/package/asciir" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">npm Package</a></li>
+              <li><a href="https://www.npmjs.com/package/@asciirender/asciir" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">npm Package</a></li>
             </ul>
           </div>
 
@@ -35,10 +35,10 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="font-semibold mb-4">Resources</h3>
             <ul className="space-y-2 text-slate-400 text-sm">
-              <li><a href="https://github.com/AkshayPall/asciir" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a></li>
-              <li><a href="https://github.com/AkshayPall/asciir/issues" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Issues</a></li>
-              <li><a href="https://github.com/AkshayPall/asciir/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Contributing</a></li>
-              <li><a href="https://github.com/AkshayPall/asciir/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">License</a></li>
+              <li><a href="https://github.com/ASCIIRenderer/ASCIIR" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">GitHub</a></li>
+              <li><a href="https://github.com/ASCIIRenderer/ASCIIR/issues" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Issues</a></li>
+              <li><a href="https://github.com/ASCIIRenderer/ASCIIR/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Contributing</a></li>
+              <li><a href="https://github.com/ASCIIRenderer/ASCIIR/blob/main/LICENSE" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">License</a></li>
             </ul>
           </div>
 
@@ -47,7 +47,7 @@ const Footer: React.FC = () => {
             <h3 className="font-semibold mb-4">Stay Updated</h3>
             <p className="text-slate-400 text-sm mb-3">Star us on GitHub for updates</p>
             <a
-              href="https://github.com/AkshayPall/asciir"
+              href="https://github.com/ASCIIRenderer/ASCIIR"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded-lg font-medium transition-colors text-sm"
@@ -66,7 +66,7 @@ const Footer: React.FC = () => {
             </p>
             <div className="flex items-center gap-6">
               <a
-                href="https://github.com/AkshayPall/asciir"
+                href="https://github.com/ASCIIRenderer/ASCIIR"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-slate-400 hover:text-white transition-colors"

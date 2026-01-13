@@ -1,16 +1,16 @@
 {
-  "name": "asciir",
-  "version": "1.0.2",
+  "name": "@asciirender/asciir",
+  "version": "1.0.3",
   "description": "A powerful React component for converting images to beautiful ASCII art with customizable settings",
-  "author": "Vinay",
+  "author": "dvinay",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ACIIRenderer/ASCIIR.git"
+    "url": "git+https://github.com/ASCIIRenderer/ASCIIR.git"
   },
-  "homepage": "https://github.com/ACIIRenderer/ASCIIR#readme",
+  "homepage": "https://asciir.vercel.app",
   "bugs": {
-    "url": "https://github.com/ACIIRenderer/ASCIIR/issues"
+    "url": "https://github.com/ASCIIRenderer/ASCIIR/issues"
   },
   "publishConfig": {
     "access": "public",

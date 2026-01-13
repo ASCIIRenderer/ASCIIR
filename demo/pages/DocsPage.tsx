@@ -141,11 +141,11 @@ const DocsPage: React.FC = () => {
             </div>
 
             <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Quick Install</h2>
-            <CodeBlock code="npm install asciir" language="bash" id="quick-install" />
+            <CodeBlock code="npm install @asciirender/asciir" language="bash" id="quick-install" />
 
             <h2 className="text-2xl font-bold text-slate-900 mt-12 mb-4">Basic Usage</h2>
             <CodeBlock
-              code={`import { ASCIIR } from 'asciir';
+              code={`import { ASCIIR } from '@asciirender/asciir';
 
 function App() {
   return <ASCIIR src="/your-image.jpg" />;
@@ -174,7 +174,7 @@ function App() {
             </p>
 
             <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Using npm</h2>
-            <CodeBlock code="npm install asciir" language="bash" id="npm-install" />
+            <CodeBlock code="npm install @asciirender/asciir" language="bash" id="npm-install" />
 
             <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Requirements</h2>
             <ul className="space-y-2 my-4">
@@ -191,7 +191,7 @@ function App() {
 
             <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Verify Installation</h2>
             <CodeBlock
-              code={`import { ASCIIR, useASCIIRender } from 'asciir';
+              code={`import { ASCIIR, useASCIIRender } from '@asciirender/asciir';
 
 // If this compiles without errors, you're ready to go!
 console.log('ASCIIR installed successfully');`}
@@ -211,7 +211,7 @@ console.log('ASCIIR installed successfully');`}
 
             <h2 className="text-2xl font-bold text-slate-900 mt-10 mb-4">Step 1: Import the Component</h2>
             <CodeBlock
-              code={`import { ASCIIR, useASCIIRender } from 'asciir';`}
+              code={`import { ASCIIR, useASCIIRender } from '@asciirender/asciir';`}
               language="tsx"
               id="step1"
             />
@@ -366,7 +366,7 @@ config={{ characterSet: ' .-+*#' }} // Minimal set`}
   ASCIIRenderConfig,
   ASCIIRenderRef,
   ProcessingResult 
-} from 'asciir';
+} from '@asciirender/asciir';
 
 // ProcessingResult interface
 interface ProcessingResult {
@@ -395,7 +395,7 @@ interface ProcessingResult {
             </p>
 
             <CodeBlock
-              code={`import { ASCIIR, useASCIIRender } from 'asciir';
+              code={`import { ASCIIR, useASCIIRender } from '@asciirender/asciir';
 
 function MyComponent() {
   const asciiRef = useASCIIRender();
@@ -716,7 +716,7 @@ await asciiRef.current?.copyToClipboard();`}
 
             <div className="mt-8 pt-6 border-t border-slate-200 px-3">
               <a
-                href="https://github.com/AkshayPall/asciir"
+                href="https://github.com/ASCIIRenderer/ASCIIR"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900"
@@ -725,7 +725,7 @@ await asciiRef.current?.copyToClipboard();`}
                 View on GitHub
               </a>
               <a
-                href="https://www.npmjs.com/package/asciir"
+                href="https://www.npmjs.com/package/@asciirender/asciir"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 text-sm text-slate-600 hover:text-slate-900 mt-3"
